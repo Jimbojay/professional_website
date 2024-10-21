@@ -3,31 +3,31 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
+  }
+  
+  body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-}
-
-/* Full-width banner */
-.banner {
+  }
+  
+  /* Full-width banner */
+  .banner {
     position: relative;
     width: 100vw;
     height: auto;
     overflow: hidden;
-}
-
-.banner-image {
-    width: 100vw;
-    height: auto;
+  }
+  
+  .banner-image {
+    width: 100vw; /* Full width of the screen */
+    height: auto; /* Maintain aspect ratio */
     object-fit: cover;
-}
-
-/* Navbar positioning */
-.navbar {
+  }
+  
+  /* Navbar positioning */
+  .navbar {
     position: absolute;
     top: 10px;
     right: 20px;
@@ -35,221 +35,125 @@ body {
     justify-content: flex-end;
     padding: 10px;
     z-index: 2;
-}
-
+  }
+  
 /* Social media icons */
 .social-media {
-    display: flex;
-    gap: 10px;
-    flex-direction: row;
+  display: flex;
+  gap: 10px;
+  flex-direction: row; /* Ensure horizontal layout on all screen sizes */
 }
 
 /* White social media icons */
 .icon-white {
-    width: 32px;
-    height: 32px;
-    filter: brightness(0) invert(1);
-    transition: transform 0.3s ease, color 0.3s ease;
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
+/* Fancy hover effect for the email icon */
 .icon-white:hover {
-    transform: scale(1.2);
-    filter: brightness(1) invert(0);
-    cursor: pointer;
+  transform: scale(1.2); /* Enlarge icon on hover */
+  filter: brightness(1) invert(0); /* Change the color */
+  cursor: pointer;
 }
 
 /* Add a shake effect for email icon only */
 .social-media a:first-child img:hover {
-    animation: shake 0.5s;
-    animation-iteration-count: 1;
+  animation: shake 0.5s;
+  animation-iteration-count: 1;
 }
 
 /* Keyframes for shake effect */
 @keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-/* Logo section below the banner */
-.logo-section {
-    position: absolute;
-    top: calc(100% + 20px); /* 20px below the banner */
-    left: 50%; /* Keep horizontally centered */
-    transform: translateX(-50%); /* Center the group horizontally */
-    width: 600px; /* Size of the entire section */
-    height: 600px;
-}
-
-/* Logo section below the banner */
-.logo-section {
-    display: flex;
-    justify-content: flex-start; /* Align logos to the left */
-    margin-top: 30px;
-    position: relative;
-}
-
-/* Logo container */
-.logo-container {
-    position: relative;
-    width: 1000px;
-    height: 150px; /* Height to ensure initial horizontal alignment */
-    display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-}
-
-/* Horizontal layout: No transition, no transform */
-.logo-container img {
-    width: 125px;
-    height: auto;
-    position: relative;
-    /* No transition or transform applied to the horizontal state */
-}
-
-/* When 'circle' class is added, apply transition to the logos */
-.logo-container.circle img {
-    position: absolute;
-    transition: transform 0.5s ease; /* Apply transition only for circular layout */
-}
-
-/* Circular layout with a bigger circle */
-.logo-container.circle {
-    position: absolute; /* Absolute to allow full control of positioning */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Perfect center adjustment */
-    width: 600px; /* Size of the circle */
-    height: 600px; /* Size of the circle */
+  
+  /* Logo section below the banner */
+  .logo-section {
     display: flex;
     justify-content: center;
-    align-items: center;
-}
-
-/* Circular positions with new organization: Logo 1 to Logo 6 clockwise */
-.logo-container.circle img {
-    width: 125px;
+    margin-top: 30px;
+  }
+  
+  .logo-container {
+    display: flex;
+    justify-content: space-between; /* Ensures equal spacing between logos */
+    width: 1000px; /* Total width: 6 logos at 150px each + 5 gaps at 50px each */
+    margin: 0 auto; /* Center the logo grid on the page */
+  }
+  
+  .logo-container img {
+    width: 125px; /* Adjusted logo width */
     height: auto;
-    position: absolute; /* Absolute positioning for logos */
-}
-
-.logo-container.circle img:nth-child(1) {
-    transform: translate(-150px, -250px); /* Top-left (Logo 1) */
-}
-
-.logo-container.circle img:nth-child(2) {
-    transform: translate(150px, -250px); /* Top-right (Logo 2) */
-}
-
-.logo-container.circle img:nth-child(3) {
-    transform: translate(300px, 0px); /* Right (Logo 3) */
-}
-
-.logo-container.circle img:nth-child(4) {
-    transform: translate(150px, 250px); /* Bottom-right (Logo 4) */
-}
-
-.logo-container.circle img:nth-child(5) {
-    transform: translate(-150px, 250px); /* Bottom-left (Logo 5) */
-}
-
-.logo-container.circle img:nth-child(6) {
-    transform: translate(-300px, 0px); /* Left (Logo 6) */
-}
-
-/* Venn Diagram Image Styling */
-.venn-diagram {
-    position: absolute;
-    width: 350px; /* Fixed width for the Venn diagram */
-    height: auto;
-    z-index: 1; /* Ensure it stays behind the logos */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Perfect center adjustment */
-}
-
-/* When the page is scrolled and the circle is visible, show the Venn Diagram */
-.logo-container.circle ~ .venn-diagram {
-    opacity: 1; /* Make the Venn Diagram visible */
-    transition: opacity 0.5s ease-in-out;
-    z-index: 0; /* Ensure it's behind logos */
-}
-
-/* Responsive Design with Media Queries */
-@media screen and (max-width: 900px) {
-    .logo-container.circle {
-        width: 450px; /* Adjust size for medium screens */
-        height: 450px;
+    margin: 0; /* Remove any additional margin, as spacing is handled by Flexbox */
+  }
+  
+  /* Responsive Design with Media Queries */
+  
+  /* For screens less than 768px (tablets and small desktops) */
+  @media screen and (max-width: 900px) {
+    .navbar {
+      top: 5px;
+      right: 10px;
     }
-
-    .logo-container.circle img:nth-child(1) {
-        transform: translate(-120px, -200px); /* Adjust positions */
+  
+    .icon-white {
+      width: 24px;
+      height: 24px; /* Smaller icons on tablets */
     }
-
-    .logo-container.circle img:nth-child(2) {
-        transform: translate(120px, -200px);
+  
+    .banner-image {
+      height: 50vh; /* Banner takes up less vertical space */
     }
-
-    .logo-container.circle img:nth-child(3) {
-        transform: translate(240px, 0px);
+  
+    .logo-container {
+      flex-wrap: wrap; /* Logos wrap into two rows on smaller screens */
+      width: 100%;
+      gap: 15px;
     }
-
-    .logo-container.circle img:nth-child(4) {
-        transform: translate(120px, 200px);
+  
+    .logo-container img {
+      width: 100px; /* Adjust logo size for smaller screens */
     }
-
-    .logo-container.circle img:nth-child(5) {
-        transform: translate(-120px, 200px);
+  }
+  
+  /* For screens less than 480px (mobile phones) */
+  @media screen and (max-width: 480px) {
+    .navbar {
+      top: 5px;
+      right: 5px;
     }
-
-    .logo-container.circle img:nth-child(6) {
-        transform: translate(-240px, 0px);
+  
+    .icon-white {
+      width: 20px;
+      height: 20px; /* Smaller icons for mobile */
     }
-
-    .venn-diagram {
-        width: 300px; /* Adjust Venn diagram size for medium screens */
+  
+    .banner-image {
+      height: 40vh; /* Banner height reduced on mobile */
+      object-fit: cover; /* Ensures the banner covers the width */
     }
-}
-
-@media screen and (max-width: 480px) {
-    .logo-container.circle {
-        width: 300px; /* Adjust size for small screens */
-        height: 300px;
+  
+    .logo-container {
+      flex-wrap: wrap;
+      width: 100%;
     }
-
-    .logo-container.circle img:nth-child(1) {
-        transform: translate(-100px, -150px); /* Adjust positions */
+  
+    .logo-container img {
+      width: 60px; /* Adjust logo size for mobile screens */
     }
-
-    .logo-container.circle img:nth-child(2) {
-        transform: translate(100px, -150px);
-    }
-
-    .logo-container.circle img:nth-child(3) {
-        transform: translate(150px, 0px);
-    }
-
-    .logo-container.circle img:nth-child(4) {
-        transform: translate(100px, 150px);
-    }
-
-    .logo-container.circle img:nth-child(5) {
-        transform: translate(-100px, 150px);
-    }
-
-    .logo-container.circle img:nth-child(6) {
-        transform: translate(-150px, 0px);
-    }
-
-    .venn-diagram {
-        width: 200px; /* Further adjust Venn diagram size for small screens */
-    }
-}
+  }
+    
