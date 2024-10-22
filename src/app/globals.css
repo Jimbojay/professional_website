@@ -1,33 +1,37 @@
+/* Import Orbitron and Source Code Pro */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Source+Code+Pro:wght@400;700&display=swap');
+
 /* Reset default browser padding and margin */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  body {
-    font-family: sans-serif;
+}
+
+body {
+    font-family: 'Source Code Pro', sans-serif; /* Use Source Code Pro for body text */
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-  }
-  
-  /* Full-width banner */
-  .banner {
+    background-color: #ACB5B0; /* Set the background color */
+}
+
+/* Full-width banner */
+.banner {
     position: relative;
     width: 100vw;
     height: auto;
     overflow: hidden;
-  }
-  
-  .banner-image {
+}
+
+.banner-image {
     width: 100vw; /* Full width of the screen */
     height: auto; /* Maintain aspect ratio */
     object-fit: cover;
-  }
-  
-  /* Navbar positioning */
-  .navbar {
+}
+
+/* Navbar positioning */
+.navbar {
     position: absolute;
     top: 10px;
     right: 20px;
@@ -35,125 +39,183 @@
     justify-content: flex-end;
     padding: 10px;
     z-index: 2;
-  }
-  
+}
+
 /* Social media icons */
 .social-media {
-  display: flex;
-  gap: 10px;
-  flex-direction: row; /* Ensure horizontal layout on all screen sizes */
+    display: flex;
+    gap: 10px;
+    flex-direction: row; /* Ensure horizontal layout on all screen sizes */
 }
 
 /* White social media icons */
 .icon-white {
-  width: 32px;
-  height: 32px;
-  filter: brightness(0) invert(1);
-  transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition */
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
 }
 
-/* Fancy hover effect for the email icon */
-.icon-white:hover {
-  transform: scale(1.2); /* Enlarge icon on hover */
-  filter: brightness(1) invert(0); /* Change the color */
-  cursor: pointer;
+.social-media a img:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
 }
 
-/* Add a shake effect for email icon only */
-.social-media a:first-child img:hover {
-  animation: shake 0.5s;
-  animation-iteration-count: 1;
-}
-
-/* Keyframes for shake effect */
-@keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
-}
-
-  
-  /* Logo section below the banner */
-  .logo-section {
+/* Logo section below the banner */
+.logo-section {
     display: flex;
     justify-content: center;
     margin-top: 30px;
-  }
-  
-  .logo-container {
+}
+
+.logo-container {
     display: flex;
     justify-content: space-between; /* Ensures equal spacing between logos */
-    width: 1000px; /* Total width: 6 logos at 150px each + 5 gaps at 50px each */
+    width: 1000px; /* Total width: 6 logos at 125px each + gaps */
     margin: 0 auto; /* Center the logo grid on the page */
-  }
-  
-  .logo-container img {
-    width: 125px; /* Adjusted logo width */
+}
+
+.logo-container img {
+    width: 125px; /* Row logo size */
     height: auto;
-    margin: 0; /* Remove any additional margin, as spacing is handled by Flexbox */
-  }
-  
-  /* Responsive Design with Media Queries */
-  
-  /* For screens less than 768px (tablets and small desktops) */
-  @media screen and (max-width: 900px) {
-    .navbar {
-      top: 5px;
-      right: 10px;
-    }
-  
-    .icon-white {
-      width: 24px;
-      height: 24px; /* Smaller icons on tablets */
-    }
-  
-    .banner-image {
-      height: 50vh; /* Banner takes up less vertical space */
-    }
-  
-    .logo-container {
-      flex-wrap: wrap; /* Logos wrap into two rows on smaller screens */
-      width: 100%;
-      gap: 15px;
-    }
-  
-    .logo-container img {
-      width: 100px; /* Adjust logo size for smaller screens */
-    }
-  }
-  
-  /* For screens less than 480px (mobile phones) */
-  @media screen and (max-width: 480px) {
-    .navbar {
-      top: 5px;
-      right: 5px;
-    }
-  
-    .icon-white {
-      width: 20px;
-      height: 20px; /* Smaller icons for mobile */
-    }
-  
-    .banner-image {
-      height: 40vh; /* Banner height reduced on mobile */
-      object-fit: cover; /* Ensures the banner covers the width */
-    }
-  
-    .logo-container {
-      flex-wrap: wrap;
-      width: 100%;
-    }
-  
-    .logo-container img {
-      width: 60px; /* Adjust logo size for mobile screens */
-    }
-  }
+    margin: 0;
+}
+
+/* Content wrapper for text and circle */
+.content-wrapper {
+    display: flex;
+    justify-content: space-between; /* Ensure space between text and circle */
+    align-items: center; /* Align both vertically */
+    margin-top: calc(30px + 30px); /* Adjust the margin-top based on the circle size */
+    padding: 0 30px; /* Add padding for spacing from the sides */
+}
+
+.text-section {
+    flex: 1; /* Allow the text section to take up available space */
+    max-width: 480px; /* Ensure text section and circle have equal width */
+    margin-right: 80px; /* Add space between the text and the circle */
+    margin-left: -30px; /* Move the text 30px more to the left */
     
+    /* Border for text section */
+    border: 2px solid #363535; /* Same border as circle */
+    padding: 20px; /* Space inside the border */
+    border-radius: 5px; /* Optional rounded corners */
+    
+    /* Ensure height matches the circle */
+    height: 550px; /* Match the circle's height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the text */
+}
+
+
+.text-section h2 {
+    font-family: 'Orbitron', sans-serif; /* Orbitron for headings */
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: 800; /* ExtraBold weight for headers */
+}
+
+.text-section p {
+    font-family: 'Source Code Pro', sans-serif; /* Source Code Pro for body text */
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.text-section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.text-section ul li {
+    font-family: 'Source Code Pro', sans-serif; /* Use Source Code Pro for list items */
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Circle container for the logos */
+.circle-container {
+    position: relative;
+    width: 550px; /* Match the size of the circle */
+    height: 550px;
+    border-radius: 50%;
+    margin-left: 30px; /* Optional: position it slightly from the left */
+}
+
+/* Venn Diagram in the center */
+.venn-diagram {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: auto;
+}
+
+/* Circular image positioning */
+.circle-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    width: 125px;  /* Same as the row logo size */
+    height: auto;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translate(245px) rotate(calc(-1 * var(--angle)));
+}
+
+/* Responsive Design with Media Queries */
+
+/* For screens less than 768px (tablets and small desktops) */
+@media screen and (max-width: 900px) {
+    .navbar {
+        top: 5px;
+        right: 10px;
+    }
+
+    .icon-white {
+        width: 24px;
+        height: 24px; /* Smaller icons on tablets */
+    }
+
+    .banner-image {
+        height: 50vh; /* Banner takes up less vertical space */
+    }
+
+    .logo-container {
+        flex-wrap: wrap; /* Logos wrap into two rows on smaller screens */
+        width: 100%;
+        gap: 15px;
+    }
+
+    .logo-container img {
+        width: 100px; /* Adjust logo size for smaller screens */
+    }
+
+    .circle-image {
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(120px) rotate(calc(-1 * var(--angle)));
+        /* Adjust translate for smaller screens */
+    }
+}
+
+/* For screens less than 480px (mobile phones) */
+@media screen and (max-width: 480px) {
+    .navbar {
+        top: 5px;
+        right: 5px;
+    }
+
+    .icon-white {
+        width: 20px;
+        height: 20px; /* Smaller icons for mobile */
+    }
+
+    .banner-image {
+        height: 40vh; /* Banner height reduced on mobile */
+        object-fit: cover; /* Ensures the banner covers the width */
+    }
+
+    .logo-container img {
+        width: 60px; /* Adjust logo size for mobile screens */
+    }
+}
+
+
