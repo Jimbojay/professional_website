@@ -13,15 +13,27 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background-color: #ACB5B0; /* Set the background color */
+    background-color: #617E82; /* Background color of the body */
 }
 
 /* Full-width banner */
 .banner {
     position: relative;
     width: 100vw;
-    height: auto;
+    height: auto; /* Full viewport height for the banner */
     overflow: hidden;
+    background-color: #617E82;
+    background: 
+        linear-gradient(to bottom, rgba(97, 126, 130, 0.7), #617E82); 
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    padding: 0;
+        /* ,url('/assets/images/Copy of Background_bright (1).png');  */
+    /*background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; */
+    /*mix-blend-mode: multiply; /* or try other blend modes like overlay, screen, etc. */
 }
 
 .banner-image {
@@ -64,7 +76,7 @@ body {
 .logo-section {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 60px;
 }
 
 .logo-container {
@@ -80,86 +92,516 @@ body {
     margin: 0;
 }
 
-/* Content wrapper for text and circle */
-.content-wrapper {
+/* Content wrapper for text and Venn diagram */
+.introduction-section {
     display: flex;
-    justify-content: space-between; /* Ensure space between text and circle */
-    align-items: center; /* Align both vertically */
-    margin-top: calc(30px + 30px); /* Adjust the margin-top based on the circle size */
-    padding: 0 30px; /* Add padding for spacing from the sides */
+    justify-content: center; /* Center the entire content horizontally */
+    align-items: center; /* Vertically align both items */
+    margin-top: 60px; /* Adjust the margin-top */
 }
 
-.text-section {
-    flex: 1; /* Allow the text section to take up available space */
-    max-width: 480px; /* Ensure text section and circle have equal width */
-    margin-right: 80px; /* Add space between the text and the circle */
-    margin-left: -30px; /* Move the text 30px more to the left */
-    
-    /* Border for text section */
-    border: 2px solid #363535; /* Same border as circle */
-    padding: 20px; /* Space inside the border */
-    border-radius: 5px; /* Optional rounded corners */
-    
-    /* Ensure height matches the circle */
-    height: 550px; /* Match the circle's height */
+/* Wrapper for the content group (text and Venn diagram) */
+.introduction-section-text-ven {
     display: flex;
-    flex-direction: column;
-    justify-content: center; /* Vertically center the text */
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid #83DAF9;  */
+    border-radius: 5px; 
+    padding: 20px; /* Padding inside the group to give space between the content and the border */
+    gap: 40px; /* Space between the text and the Venn diagram */
+    background-color: white;
+    margin-bottom: 100px;
 }
 
-
-.text-section h2 {
-    font-family: 'Orbitron', sans-serif; /* Orbitron for headings */
-    font-size: 24px;
-    margin-bottom: 15px;
-    font-weight: 800; /* ExtraBold weight for headers */
-}
-
-.text-section p {
-    font-family: 'Source Code Pro', sans-serif; /* Source Code Pro for body text */
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-.text-section ul {
-    list-style-type: disc;
-    margin-left: 20px;
-}
-
-.text-section ul li {
-    font-family: 'Source Code Pro', sans-serif; /* Use Source Code Pro for list items */
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-/* Circle container for the logos */
-.circle-container {
+/* Left text section */
+.introduction-section-text {
+    flex: 1;
+    max-width: 600px; /* Adjust the width of the text box */
+    text-align: left;
+    border: 2px solid #434C4D; /* Border around the group */
+    border-radius: 5px; /* Optional: rounded corners */
+    padding: 20px;
     position: relative;
-    width: 550px; /* Match the size of the circle */
-    height: 550px;
-    border-radius: 50%;
-    margin-left: 30px; /* Optional: position it slightly from the left */
+    display: block; /* Make the container block to allow floating image */
 }
 
-/* Venn Diagram in the center */
+/* Personal picture aligned to the bottom-right */
+.personal-picture {
+    float: right; /* Float the image to the right */
+    margin: 0 0 10px 10px; /* Adds space between the image and the text */
+    width: 150px; /* Adjust the size of the image */
+    height: auto;
+}
+
+/* Venn diagram section */
+.venn-diagram-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .venn-diagram {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
+    width: 400px; /* Adjust size of the Venn diagram */
     height: auto;
 }
 
-/* Circular image positioning */
-.circle-image {
+/*///////////////////////////////////
+/* Base styling for reusable sections */
+
+:root {
+    --divider-width: 50px; /* Define the width as a CSS variable */
+    --services-text-box-width: 450px;
+
+    --color-section-1: #7A8288;
+    --color-section-2: #E0E5E9;
+    --color-section-3: #7A8288;
+    --color-section-4: #E0E5E9;
+    --color-section-5: #7A8288;
+    --color-section-6: #E0E5E9;
+}
+
+.service-sections {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Full alignment along the Y-axis */
+    width: 100vw;
+    /* height: 550px; */
+    padding: 100px 100px 0px 100px;
+    margin-bottom: 100px;
+    transform: translateY(20px); /* Initial position for a slide-in effect */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+}
+
+.service-sections.in-view {
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Slide to original position */
+}
+
+.service-sections:hover {
+    transform: scale(1.02); /* Slight zoom-in on hover */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15); /* Subtle shadow on hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Title styling */
+.section-title {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform-origin: center center;
-    width: 125px;  /* Same as the row logo size */
-    height: auto;
-    transform: translate(-50%, -50%) rotate(var(--angle)) translate(245px) rotate(calc(-1 * var(--angle)));
+    top: 10px; /* 10px from the top of the section */
+    width: 100vw; /* Full width of section for horizontal centering */
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    /* background-color: #617E82; */
+    margin-bottom: 20px; /* Space below title */
+    margin-top: 12px; 
+    z-index: 10; /* Higher z-index to appear above other elements */
+
+}
+
+.section-title h2 {
+    font-size: 24px; /* Adjust font size as needed */
+    font-weight: 800;
+    margin: 0;
+    color: #162828; /* Dark Slate Gray for a strong contrast */
+    padding: 10px 20px; /* Padding around text for readability */
+    /* border-radius: 8px; Rounded corners for a softer look */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    text-transform: uppercase; /* Capitalize for a chapter-like feel */
+    letter-spacing: 1px; /* Slight letter spacing for readability */
+    /* border-bottom: 4px solid #617E82;  */
+    border-top: 2px solid #434C4D;
+    border-bottom: 2px solid #434C4D;
+    width: 100vw;
+    background-color: #BECACC;
+}
+
+.section-title2 {
+    position: absolute;
+    top: 10px; /* 10px from the top of the section */
+    width: 350px; /* Full width of section for horizontal centering */
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    /* background-color: #617E82; */
+    margin-bottom: 20px; /* Space below title */
+    z-index: 10; /* Higher z-index to appear above other elements */
+
+}
+
+.section-title2 h2 {
+    font-size: 24px; /* Adjust font size as needed */
+    font-weight: 800;
+    margin: 0;
+    color: black; /* Dark Slate Gray for a strong contrast */
+    padding: 10px 20px; /* Padding around text for readability */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow to make it pop */
+    text-transform: uppercase; /* Capitalize for a chapter-like feel */
+    letter-spacing: 1px; /* Slight letter spacing for readability */
+    border-bottom: 4px solid #617E82; /* Decorative underline */
+
+}
+
+/* Individual section background colors */
+.data-management-section {
+    background: repeating-linear-gradient(
+        45deg,              /* Angle for diagonal lines */
+        var(--color-section-1),            /* First line color */
+        var(--color-section-1) 10px,       /* Width of the colored line */
+        rgba(0, 0, 0, 0) 10px, /* Transparent line starts */
+        rgba(0, 0, 0, 0) 20px  /* Transparent line width */
+    );
+    border: none; /* No border */
+    box-shadow: none; /* No shadow */
+}
+
+.data-management-section {
+    background: linear-gradient(
+      to bottom right,
+      var(--color-section-2),          /* Bottom-left color */
+      #617E82 /* Top-right color */
+    );
+}
+
+.section1 {
+    background: linear-gradient(
+      to bottom left,
+      var(--color-section-2),          /* Bottom-left color */
+      #617E82 /* Top-right color */
+    );
+
+    display: flex;
+    align-items: center;
+    gap: 0; /* Ensure no gap between elements */
+    padding-top: 120px; /* Padding for spacing around the section */
+    padding-bottom: 40px;
+}
+
+.section2 {
+    background: linear-gradient(
+      to bottom right,
+      var(--color-section-2),          /* Bottom-left color */
+      #617E82 /* Top-right color */
+    );
+
+    display: flex;
+    align-items: center;
+    gap: 0; /* Ensure no gap between elements */
+    padding: 20px 0; /* Padding for spacing around the section */
+
+}
+
+.data-governance-section {
+    background: repeating-linear-gradient(
+        135deg,              /* Angle for diagonal lines */
+        var(--color-section-2),            /* First line color */
+        var(--color-section-2) 10px,       /* Width of the colored line */
+        rgba(0, 0, 0, 0) 10px, /* Transparent line starts */
+        rgba(0, 0, 0, 0) 20px  /* Transparent line width */
+    );
+    border: none; /* No border */
+    box-shadow: none; /* No shadow */
+}
+.data-governance-section {
+    background: linear-gradient(
+      to bottom left,
+      var(--color-section-2),          /* Bottom-left color */
+      #617E82 /* Top-right color */
+    );
+}
+
+
+.project-management-section {
+    background: repeating-linear-gradient(
+        45deg,              /* Angle for diagonal lines */
+        var(--color-section-3),            /* First line color */
+        var(--color-section-3) 10px,       /* Width of the colored line */
+        rgba(0, 0, 0, 0) 10px, /* Transparent line starts */
+        rgba(0, 0, 0, 0) 20px  /* Transparent line width */
+    );
+    border: none; /* No border */
+    box-shadow: none; /* No shadow */
+}
+
+.project-management-section {
+    background: linear-gradient(
+      to bottom,
+      var(--color-section-3),          /* Bottom-left color */
+      #617E82 /* Top-right color */
+    );
+}
+
+.programming-section {
+    background: repeating-linear-gradient(
+        135deg,              /* Angle for diagonal lines */
+        var(--color-section-4),            /* First line color */
+        var(--color-section-4) 10px,       /* Width of the colored line */
+        rgba(0, 0, 0, 0) 10px, /* Transparent line starts */
+        rgba(0, 0, 0, 0) 20px  /* Transparent line width */
+    );
+    border: none; /* No border */
+    box-shadow: none; /* No shadow */
+}
+
+.programming-section {
+    background: linear-gradient(
+      to bottom,
+      var(--color-section-4),          /* Bottom-left color */
+      #617E82 /* Top-right color */
+    );
+}
+
+.business-intelligence-section {
+    background: repeating-linear-gradient(
+        45deg,              /* Angle for diagonal lines */
+        var(--color-section-5),            /* First line color */
+        var(--color-section-5) 10px,       /* Width of the colored line */
+        rgba(0, 0, 0, 0) 10px, /* Transparent line starts */
+        rgba(0, 0, 0, 0) 20px  /* Transparent line width */
+    );
+    border: none; /* No border */
+    box-shadow: none; /* No shadow */
+}
+
+.business-intelligence-section {
+    background: linear-gradient(
+      to bottom,
+      var(--color-section-5),          /* Bottom-left color */
+      #617E82 /* Top-right color */
+    );
+}
+
+.product-data-expert-section {
+    background: repeating-linear-gradient(
+        135deg,              /* Angle for diagonal lines */
+        var(--color-section-6),            /* First line color */
+        var(--color-section-6) 10px,       /* Width of the colored line */
+        rgba(0, 0, 0, 0) 10px, /* Transparent line starts */
+        rgba(0, 0, 0, 0) 20px  /* Transparent line width */
+    );
+    border: none; /* No border */
+    box-shadow: none; /* No shadow */
+}
+
+.product-data-expert-section {
+    background: linear-gradient(
+      to bottom,
+      var(--color-section-6),          /* Bottom-left color */
+      #617E82 /* Top-right color */
+    );
+}
+
+/* Styling for the centered divider */
+.divider {
+    width: var(--divider-width);
+    height: 100%;
+    /* background-color: #434C4D; */
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+
+    background-color: transparent; /* Fully transparent background */
+    border: none; /* Ensure no border is applied */
+    box-shadow: none; /* Remove any shadow if previously applied */
+}
+
+/* Styling for text box and picture, ensuring they touch the divider */
+.services-text-box, .picture {
+    /* max-width: 600px; Consistent max-width */
+    /* width:  calc(25vw - 25px);; */
+    /* flex-grow: 1; */
+    padding: 0; /* Ensure no padding inside */
+    margin: 0; /* Ensure no margin */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Text box specific styling */
+.services-text-box {
+    width: var(--services-text-box-width);
+    display: block;
+    padding: 0px;
+    border: 2px solid #434C4D;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+
+.section1-text-box {
+    width: calc(100vw - 375px); /* Responsive width calculation */
+    display: block;
+    column-count: 2; /* Split content into two columns */
+    column-gap: 30px;
+    padding: 35px;
+    border: 2px solid #434C4D;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.6);
+    /* margin-right: 100px; Ensures 100px gap from the right edge */
+}
+
+.section1-text-box h3 {
+    margin-bottom: 5px; /* Adjust this value as needed */
+    text-decoration: underline;
+}
+
+.section1-text-box li {
+    margin-left: 12px; /* Adjust this value as needed */
+}
+
+
+.services-text-box ul ul {
+    margin-left: 20px; /* Indent nested bullet points */
+    list-style-type: circle; /* Change bullet style if desired */
+}
+
+.services-text-box h3 {
+    margin-bottom: 5px; /* Adjust this value as needed */
+}
+
+
+/* Picture container specific styling */
+.picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px; /* Remove any extra margin */
+    margin-right: 50px; /* Remove any extra margin */
+    padding: 0; /* Remove any extra padding */
+    border: 2px solid #434C4D;
+    border-radius: 5px;
+}
+
+.picture img {
+    height: 350px;
+    width: auto;
+    display: block;
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
+/* .data-management-layout {
+    display: flex;
+    align-items: center;
+    gap: 0; 
+    padding: 20px 0; 
+} */
+
+
+
+/* .data-management-picture img {
+    height: 350px;
+    width: auto;
+} */
+
+/* Divider between picture and text, touching both
+.data-management-divider {
+    width: var(--divider-width);
+    height: 100%;
+    background-color: #434C4D;
+} */
+
+/* Two-column layout for text box */
+.data-management-text-box {
+    width: calc(100vw - 500px); /* Responsive width calculation */
+    display: block;
+    column-count: 2; /* Split content into two columns */
+    column-gap: 30px;
+    padding: 20px;
+    border: 2px solid #434C4D;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin-right: 100px; /* Ensures 100px gap from the right edge */
+}
+
+.data-management-text-box h3 {
+    margin-bottom: 10px;
+    break-inside: avoid; /* Prevent h3 from breaking between columns */
+}
+
+.data-management-text-box ul {
+    list-style-type: disc;
+    padding-left: 20px; /* Consistent list padding */
+}
+
+
+.column-break {
+    break-before: column; /* Forces this element to start in a new column */
+}
+
+
+
+
+
+/* Responsive Design with Media Queries */
+
+/* For screens less than 768px (tablets and small desktops) */
+@media screen and (max-width: 900px) {
+    .navbar {
+        top: 5px;
+        right: 10px;
+    }
+
+    .icon-white {
+        width: 24px;
+        height: 24px;
+    }
+
+    .banner-image {
+        height: 50vh;
+    }
+
+    .logo-container {
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .logo-container img {
+        width: 100px;
+    }
+}
+
+/* For screens less than 480px (mobile phones) */
+@media screen and (max-width: 480px) {
+    .navbar {
+        top: 5px;
+        right: 5px;
+    }
+
+    .icon-white {
+        width: 20px;
+        height: 20px;
+    }
+
+    .banner-image {
+        height: 40vh;
+        object-fit: cover;
+    }
+
+    .logo-container img {
+        width: 60px;
+    }
+
+    .text-section {
+        margin-right: 40px;
+        max-width: 100%;
+    }
+
+    .venn-diagram {
+        width: 200px;
+    }
 }
 
 /* Responsive Design with Media Queries */
@@ -189,11 +631,6 @@ body {
     .logo-container img {
         width: 100px; /* Adjust logo size for smaller screens */
     }
-
-    .circle-image {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(120px) rotate(calc(-1 * var(--angle)));
-        /* Adjust translate for smaller screens */
-    }
 }
 
 /* For screens less than 480px (mobile phones) */
@@ -216,6 +653,14 @@ body {
     .logo-container img {
         width: 60px; /* Adjust logo size for mobile screens */
     }
+
+    .text-section {
+        margin-right: 40px; /* Adjust for smaller screens */
+        max-width: 100%; /* Ensure full width on small screens */
+    }
+
+    .venn-diagram {
+        width: 200px; /* Smaller Venn diagram on small screens */
+    }
+
 }
-
-
