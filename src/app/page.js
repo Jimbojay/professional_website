@@ -1,11 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "./components/Footer";
+
 
 export default function Home() {
   const [showQrCode, setShowQrCode] = useState(false);
+  const [showLetsTalk, setShowLetsTalk] = useState(false); // New state for "Let's Talk!" popup
 
   const showQrCodeModal = () => {
     setShowQrCode(true);
@@ -15,7 +17,57 @@ export default function Home() {
     setShowQrCode(false);
   };
 
-  const qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?data=tel:+31613454378&size=200x200";
+  const showLetsTalkModal = () => {
+    setShowLetsTalk(true);
+  };
+
+  const closeLetsTalkModal = () => {
+    setShowLetsTalk(false);
+  };
+
+  useEffect(() => {
+    const offset = 100; // Adjust this value based on the height of your header or navbar
+  
+    const links = document.querySelectorAll(".logo-container a, .scroll-link"); // Extend selector to .scroll-link
+    
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const sectionId = link.getAttribute("href").substring(1); // Get section ID without '#'
+        const section = document.getElementById(sectionId);
+  
+        if (section) {
+          const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({
+            top: sectionTop,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+  
+    // Cleanup event listeners on component unmount
+    return () => {
+      links.forEach((link) => link.removeEventListener("click", (e) => {}));
+    };
+  }, []);
+
+
+  const qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?data=tel:0031613454378&size=200x200";
+
+  // Load the Calendly script dynamically when "Let's Talk!" is opened
+  useEffect(() => {
+    if (showLetsTalk) {
+      const script = document.createElement("script");
+      script.src = "https://assets.calendly.com/assets/external/widget.js";
+      script.async = true;
+      document.body.appendChild(script);
+
+      return () => {
+        document.body.removeChild(script); // Clean up the script on close
+      };
+    }
+  }, [showLetsTalk]);
 
   return (
     <div>
@@ -40,16 +92,19 @@ export default function Home() {
                 <img src="/assets/images/github-icon.png" alt="GitHub Icon" className="icon-white" />
               </a>
             </div>
-            <a href="/assets/documents/Curriculum Vitae Imre Dekker_2024 English.pdf" download className="resume-button">
+            {/* <a href="/assets/documents/Curriculum Vitae Imre Dekker_2024 English.pdf" download className="resume-button">
               Download My Resume
-            </a>
+            </a> */}
+            <button className="resume-button" onClick={showLetsTalkModal}>Let's talk!</button>
+            
           </div>
         </div>
 
         <img src="/assets/images/Banner.png" alt="Banner Image" className="banner-image" />
 
         {/* Button overlaying the banner */}
-        <button className="banner-button">Let's talk!</button>
+        <button className="banner-button" onClick={showLetsTalkModal}>Let's talk!</button>
+        
       </div>
 
       {/* Modal for phone number with QR code */}
@@ -58,12 +113,39 @@ export default function Home() {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
               <span className="close" onClick={closeQrCodeModal}>&times;</span>
               <h2>Contact Number</h2>
-              <a href="tel:+31613454378" className="phone-number">+31 61345 4378</a>
-              <p>
-                <i>Click the number or scan the code</i>
-              </p>
+              <a href="tel:+31613454378" className="phone-number">+316 1345 4378</a>
               <img src={qrCodeUrl} alt="QR Code for Phone Number" />
               <button className="modal-button" onClick={closeQrCodeModal}>Close</button>
+          </div>
+        </div>
+      )}
+
+      {/* "Let's Talk!" Popup Modal */}
+      {showLetsTalk && (
+        <div className="modal-overlay" onClick={closeLetsTalkModal}>
+          <div className="lets-talk-modal-content" onClick={(e) => e.stopPropagation()}>
+            <span className="close" onClick={closeLetsTalkModal}>&times;</span>
+            <div className="lets-talk-columns">
+              {/* Column 1 - Calendly */}
+              <div className="lets-talk-column calendly-column">
+                <h2>Schedule a Call</h2>
+                <div className="calendly-inline-widget" data-url="https://calendly.com/imre-iddatasolutions?background_color=617E82&text_color=ffffff" style={{ minWidth: "320px", height: "700px" }}></div>
+              </div>
+              {/* Column 2 - Combined Contact Info */}
+              <div className="lets-talk-column contact-column">
+                <div className="phone-info">
+                  <h2><img src="/assets/images/Telephone.png" alt="Phone Icon" style={{ width: '20px', marginRight: '8px' }}/> Contact Number</h2>
+                  <a href="tel:+31613454378" className="phone-number">+316 1345 4378</a>
+                  <img src={qrCodeUrl} alt="QR Code for Phone Number" />
+                </div>
+                <hr className="separator" />
+                <div className="email-info">
+                  <h2><img src="/assets/images/email-icon.png" alt="Email Icon" style={{ width: '20px', marginRight: '8px' }}/> Email</h2>
+                  <a href="mailto:imre.iddatasolutions@gmail.com" className="contact-link">imre.iddatasolutions@gmail.com</a>
+                </div>
+              </div>
+            </div>
+            <button className="modal-button" onClick={closeLetsTalkModal}>Close</button>
           </div>
         </div>
       )}
@@ -71,12 +153,24 @@ export default function Home() {
       {/* Logo section below the banner - always visible */}
       <section className="logo-section">
         <div className="logo-container">
-          <img src="/assets/images/Data_Management_icon.png" alt="Logo 1" />
-          <img src="/assets/images/Data_Governance_icon.png" alt="Logo 2" />
-          <img src="/assets/images/Project_Management_icon.png" alt="Logo 3" />
-          <img src="/assets/images/Programming_icon.png" alt="Logo 4" />
-          <img src="/assets/images/Business_Intelligence_icon.png" alt="Logo 5" />
-          <img src="/assets/images/ProductDataExpert_icon.png" alt="Logo 6" />
+          <a href="#data-management" data-section="data-management" className="icon-wrapper">
+            <img src="/assets/images/Data_Management_icon.png" alt="Data Management Icon" />
+          </a>
+          <a href="#data-governance" data-section="data-governance" className="icon-wrapper">
+            <img src="/assets/images/Data_Governance_icon.png" alt="Data Governance Icon" />
+          </a>
+          <a href="#project-management" data-section="project-management" className="icon-wrapper">
+            <img src="/assets/images/Project_Management_icon.png" alt="Project Management Icon" />
+          </a>
+          <a href="#web3-programming" data-section="web3-programming" className="icon-wrapper">
+            <img src="/assets/images/Programming_icon.png" alt="Programming Icon" />
+          </a>
+          <a href="#bi-analytics" data-section="bi-analytics" className="icon-wrapper">
+            <img src="/assets/images/Business_Intelligence_icon.png" alt="Business Intelligence & Analytics Icon" />
+          </a>
+          <a href="#product-data-expert" data-section="product-data-expert" className="icon-wrapper">
+            <img src="/assets/images/ProductDataExpert_icon.png" alt="Product Data Expert Icon" />
+          </a>
         </div>
       </section>
 
@@ -92,18 +186,25 @@ export default function Home() {
             </p>
             <br />
             <p>
-              As a seasoned, T-shaped, data professional I have <strong>15 years of experience</strong> in a wide variety of data roles and sectors. 
-              The common denominator; focus on delivering <strong>value-generating data-assets.</strong>
+              As a seasoned, T-shaped data professional with <strong>15 years of experience </strong>across diverse data roles and sectors, 
+              I thrive in projects that are stakeholder-intensive (international and culturally sensitive), where my skills achieves <strong>impactful results</strong>. 
+              My focus remains on delivering <strong>value-generating data assets</strong> and fostering environments that align with strategic goals.
+              {/* As a seasoned, T-shaped, data professional I have <strong>15 years of experience</strong> in a wide variety of data roles and sectors. 
+              The common denominator; focus on delivering <strong>value-generating data-assets.</strong> */}
             </p>
             <br />
             <ul>
-              <li>Setting up, managing or coaching data teams</li>
-              <li>Project- and Stakeholder Management</li>
+              <li>Setup, manage or coach data teams</li>
+              <li>Project-, Product- and Stakeholder Management</li>
               <li>Blockchain, JavaScript and/or Python development</li>
               <li>Build & enable actionable (self-service) BI</li>
-              <li>(Product) data quality programs</li>
+              <li>Data quality programs</li>
               <li>Implementation of data-standards</li>
             </ul>
+            <br />
+            <p>
+              Through my <strong>extensive network</strong>, I can also provide a (team of) developer(s) skilled in any of the top programming languages to meet project demands efficiently and effectively.
+            </p>
           </div>
 
           {/* Right Section - Venn Diagram */}
@@ -116,6 +217,7 @@ export default function Home() {
       {/* Reusable sections with alternating content */}
       <motion.section
         className="service-sections section1"
+        id="data-management"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 0.75, y: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -136,7 +238,10 @@ export default function Home() {
           <ul>
             <li>Co-founder & COO</li>
             <li>Built ever-growing network of freelance developers</li>
-            <li>Spearhead Project Management & Quality control</li>
+            <li>
+              Spearhead Project Management & Quality control 
+              (see <a href="#project-management" className="scroll-link"> Project Management section</a>)
+            </li>
             <li>Developed Customer Journey (developers & clients)</li>
             <li>Requirements engineering & client management</li>
             <li>3 grants from The Graph</li>
@@ -163,14 +268,21 @@ export default function Home() {
             <li>Support omni-channel implementation</li>
             <li>Co-Development of Group KPIs/OKR and controls</li>
           </ul>
+
+          <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="download-resume-button">
+            Download Resume
+          </a>
+
         </div>
-      </motion.section>
+
+        </motion.section>
 
 
 
       {/* Reusable sections with alternating content */}
       <motion.section
         className="service-sections section1"
+        id="data-governance"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 0.75, y: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -221,11 +333,13 @@ export default function Home() {
             <li>Report on next steps</li>
           </ul>
 
-
+          <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="download-resume-button">
+            Download Resume
+          </a>
         </div>
 
         <div className="picture">
-          <img src="/assets/images/Data_Governance.webp" alt="Data Management" />
+          <img src="/assets/images/Data_Governance.webp" alt="Data Governance" />
         </div>
 
       </motion.section>
@@ -235,6 +349,7 @@ export default function Home() {
       {/* Reusable sections with alternating content */}
       <motion.section
         className="service-sections section1"
+        id="project-management"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 0.75, y: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -245,7 +360,7 @@ export default function Home() {
         </div>
 
         <div className="picture">
-          <img src="/assets/images/Project_Management.webp" alt="Data Management" />
+          <img src="/assets/images/Project_Management.webp" alt="Project Management" />
         </div>
 
 
@@ -268,8 +383,14 @@ export default function Home() {
           <h3><i>Co-founder & COO</i></h3>
           <ul>
             <li>Game development (TON) </li>
-            <li>Multiple Graph grants </li>
+            <li>Multiple grants The Graph</li>
             <li>Chainlink hackathon </li>
+            <li>Copy Trader</li>
+            <li>Build-a-bot (low code trading bot builder)</li>
+            <li>True randomization</li>
+            <li>Decentralized crowd sale</li>
+            <li>Token generator </li>
+            <li>DappAstra NFT collection</li>
           </ul>
 
           <br/>
@@ -302,6 +423,10 @@ export default function Home() {
             <li>Implemented group-wide BI-suite & PIM</li>
           </ul>
 
+          <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="download-resume-button">
+            Download Resume
+          </a>
+
         </div>
       </motion.section>
 
@@ -310,6 +435,7 @@ export default function Home() {
       {/* Reusable sections with alternating content */}
       <motion.section
         className="service-sections section1"
+        id="web3-programming"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 0.75, y: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -323,7 +449,13 @@ export default function Home() {
         <div className="section1-text-box">
           {/* <br/><br/><br/> */}
 
-          <h3><i>Python Developer</i></h3>
+          <p>
+          <strong>Through my extensive network, I can provide a (team of) developer(s) skilled in any of the top programming languages to meet project demands efficiently and effectively.</strong>
+          </p>
+
+          <br/><br/>
+
+          <h3><i>Python Automation Developer</i></h3>
           <ul>
             <li>Automate GS1 updates into RiverSand PIM with Python</li>
             <li>Reduced quarterly returning workload by +75%, equalling +1 week</li>
@@ -355,11 +487,14 @@ export default function Home() {
           Developed an Excel/VBA-based calculator tool to assist account management and sourcing
           </p>
 
+          <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="download-resume-button">
+            Download Resume
+          </a>
 
         </div>
 
         <div className="picture">
-          <img src="/assets/images/Programming.webp" alt="Data Management" />
+          <img src="/assets/images/Programming.webp" alt="Programming" />
         </div>
 
       </motion.section>
@@ -368,6 +503,7 @@ export default function Home() {
       {/* Reusable sections with alternating content */}
       <motion.section
         className="service-sections section1"
+        id="bi-analytics"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 0.75, y: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -378,7 +514,7 @@ export default function Home() {
         </div>
 
         <div className="picture">
-          <img src="/assets/images/BI_Analytics.webp" alt="Data Management" />
+          <img src="/assets/images/BI_Analytics.webp" alt="Business Intellgence and Analytics" />
         </div>
 
 
@@ -426,6 +562,10 @@ export default function Home() {
             <li>Business Analysis</li>
           </ul>
 
+          <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="download-resume-button">
+            Download Resume
+          </a>
+
         </div>
       </motion.section>
 
@@ -434,6 +574,7 @@ export default function Home() {
       {/* Reusable sections with alternating content */}
       <motion.section
         className="service-sections section1"
+        id="product-data-expert"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 0.75, y: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -448,12 +589,12 @@ export default function Home() {
           {/* <br/><br/><br/> */}
 
           <p>
-          Well established nework in both GS1 as well as ETIM
-        </p>
+          <strong>Well established nework in both GS1 as well as ETIM</strong>
+          </p>
 
-        <br/><br/>
+          <br/><br/>
 
-        <h3><i>Project lead Data Quality</i></h3>
+          <h3><i>Project lead Data Quality</i></h3>
           <ul>
             <li>GS1 data quality projects </li>
             <li>100% data compliancy for many companies</li>
@@ -478,13 +619,20 @@ export default function Home() {
             <li>Product data standard implementation (GS1)</li>
             <li>Member GS1 steering committee</li>
           </ul>
+
+          <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="download-resume-button">
+            Download Resume
+          </a>
+
         </div>
 
         <div className="picture">
-          <img src="/assets/images/ProductDataExpert.webp" alt="Data Management" />
+          <img src="/assets/images/ProductDataExpert.webp" alt="Product Data Expert" />
         </div>
 
       </motion.section>
+
+
 
 
       {/* Footer */}
