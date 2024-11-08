@@ -92,11 +92,20 @@ body {
     justify-content: center;
 }
 
+
 /* White social media icons */
 .icon-white {
     width: 37px;
     height: 37px;
     filter: brightness(0) invert(1);
+}
+
+.icon-black {
+    width: 37px;
+    height: 37px;
+    filter: none; /* Removes the filter */
+    color: #617E82; /* Sets the icon color to #617E82 */
+    fill: #617E82
 }
 
 .social-media a img:hover {
@@ -183,19 +192,19 @@ body {
 .introduction-section-text-ven {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     /* border: 2px solid #83DAF9;  */
     border-radius: 5px; 
     padding: 20px; /* Padding inside the group to give space between the content and the border */
     gap: 40px; /* Space between the text and the Venn diagram */
     background-color: white;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
 }
 
 /* Left text section */
 .introduction-section-text {
     flex: 1;
-    max-width: 600px; /* Adjust the width of the text box */
+    max-width: 500px; /* Adjust the width of the text box */
     text-align: left;
     border: 2px solid #434C4D; /* Border around the group */
     border-radius: 5px; /* Optional: rounded corners */
@@ -216,14 +225,44 @@ body {
 .venn-diagram-wrapper {
     flex: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
 }
 
 .venn-diagram {
-    width: 400px; /* Adjust size of the Venn diagram */
+    width: 350px; /* Adjust size of the Venn diagram */
     height: auto;
 }
+
+.skills-list {
+    margin-top: 20px; /* Adds space between Venn diagram and list */
+    text-align: left;
+}
+
+.skills-list ul {
+    list-style-type: none; /* Hide the default black bullets */
+    padding-left: 20px; /* Adjust indentation */
+}
+
+.skills-list li {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #162828;
+    padding-left: 20px; /* Space between custom bullet and text */
+    position: relative;
+}
+
+.skills-list li::before {
+    content: "•"; /* Custom bullet */
+    color: #617E82; /* Custom color for the bullet */
+    font-weight: bold;
+    position: absolute;
+    left: 0; /* Position bullet to the left of text */
+}
+
+
+
 
 /*///////////////////////////////////
 /* Base styling for reusable sections */
@@ -587,7 +626,7 @@ body {
 }
 
 .picture img {
-    height: 350px;
+    height: 450px;
     width: auto;
     display: block;
     margin: 0;
@@ -1083,6 +1122,157 @@ html {
         width: 200px;
     }
 }
+
+/* Testimonials section styling */
+/* Testimonials section styling */
+.testimonials-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px 0;
+    margin-top: 60px;
+    margin-bottom: 100px; /* Adjust as necessary */
+    background-color: #f7f9fc;
+    overflow: hidden;
+    width: 100vw;
+    position: relative;
+    border: 2px solid #829390; /* Same border as the "Let's talk!" button */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.testimonials-title {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between the title and the button */
+    margin-left: 20px; /* Starts 20px from the left */
+    margin-bottom: 20px;
+  }
+  
+  .testimonials-title h2 {
+    font-size: 28px;
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0; /* Remove default margin */
+  }
+  
+  .lets-talk-button {
+    padding: 10px 20px;
+    background-color: #1E2831;
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .lets-talk-button:hover {
+    background-color: #344152;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+    
+
+/* Scrolling animation */
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.testimonials-container {
+    display: flex;
+    gap: 40px;
+    animation: scroll-left 30s linear infinite;
+    transition: animation-play-state 0.3s ease;
+}
+
+/* Paused state for testimonials container */
+.testimonials-container.paused {
+    animation-play-state: paused; /* Pause animation */
+}
+
+  
+  .testimonial {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    min-width: 600px;
+    max-width: 800px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Scrolling animation */
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  /* Testimonial photo styling */
+  .testimonial-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  /* Testimonial text */
+  .testimonial-text h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+  }
+  
+  .testimonial-title {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .testimonial-content {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+    font-style: italic; /* Italicize testimonial content */
+    position: relative;
+    padding-left: 10px;
+}
+
+.testimonial-content::before {
+    /* content: "“"; Opening quotation mark */
+    font-size: 24px; /* Larger size for emphasis */
+    color: #617E82;
+    position: absolute;
+    left: -15px; /* Position slightly to the left */
+    top: 0;
+}
+
+.testimonial-content::after {
+    /* content: "”"; Closing quotation mark */
+    font-size: 24px; /* Larger size for emphasis */
+    color: #617E82;
+    position: absolute;
+    right: -10px; /* Position slightly to the right */
+    bottom: 0;
+}
+  
 
 /* Responsive Design with Media Queries */
 

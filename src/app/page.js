@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Footer from "./components/Footer";
 
-
 export default function Home() {
   const [showQrCode, setShowQrCode] = useState(false);
   const [showLetsTalk, setShowLetsTalk] = useState(false); // New state for "Let's Talk!" popup
+  const [isHovered, setIsHovered] = useState(false);
 
   const showQrCodeModal = () => {
     setShowQrCode(true);
@@ -27,15 +27,14 @@ export default function Home() {
 
   useEffect(() => {
     const offset = 100; // Adjust this value based on the height of your header or navbar
-  
-    const links = document.querySelectorAll(".logo-container a, .scroll-link"); // Extend selector to .scroll-link
-    
+    const links = document.querySelectorAll(".logo-container a, .scroll-link");
+
     links.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
-        const sectionId = link.getAttribute("href").substring(1); // Get section ID without '#'
+        const sectionId = link.getAttribute("href").substring(1);
         const section = document.getElementById(sectionId);
-  
+
         if (section) {
           const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - offset;
           window.scrollTo({
@@ -45,13 +44,12 @@ export default function Home() {
         }
       });
     });
-  
+
     // Cleanup event listeners on component unmount
     return () => {
       links.forEach((link) => link.removeEventListener("click", (e) => {}));
     };
   }, []);
-
 
   const qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?data=tel:0031613454378&size=200x200";
 
@@ -92,11 +90,9 @@ export default function Home() {
                 <img src="/assets/images/github-icon.png" alt="GitHub Icon" className="icon-white" />
               </a>
             </div>
-            {/* <a href="/assets/documents/Curriculum Vitae Imre Dekker_2024 English.pdf" download className="resume-button">
+            <a href="/assets/documents/Curriculum Vitae Imre Dekker_2024 English.pdf" download className="resume-button">
               Download My Resume
-            </a> */}
-            <button className="resume-button" onClick={showLetsTalkModal}>Let's talk!</button>
-            
+            </a>
           </div>
         </div>
 
@@ -104,7 +100,6 @@ export default function Home() {
 
         {/* Button overlaying the banner */}
         <button className="banner-button" onClick={showLetsTalkModal}>Let's talk!</button>
-        
       </div>
 
       {/* Modal for phone number with QR code */}
@@ -186,33 +181,100 @@ export default function Home() {
             </p>
             <br />
             <p>
-              As a seasoned, T-shaped data professional with <strong>15 years of experience </strong>across diverse data roles and sectors, 
-              I thrive in projects that are stakeholder-intensive (international and culturally sensitive), where my skills achieves <strong>impactful results</strong>. 
-              My focus remains on delivering <strong>value-generating data assets</strong> and fostering environments that align with strategic goals.
-              {/* As a seasoned, T-shaped, data professional I have <strong>15 years of experience</strong> in a wide variety of data roles and sectors. 
-              The common denominator; focus on delivering <strong>value-generating data-assets.</strong> */}
+              As a seasoned, T-shaped data professional with <strong>15 years of experience</strong> across diverse data roles and sectors, I thrive in projects that are stakeholder-intensive (international and culturally sensitive), where my skills achieve <strong>impactful results</strong>. My focus remains on delivering <strong>value-generating data assets</strong> and fostering environments that align with strategic goals.
             </p>
-            <br />
-            <ul>
-              <li>Setup, manage or coach data teams</li>
-              <li>Project-, Product- and Stakeholder Management</li>
-              <li>Blockchain, JavaScript and/or Python development</li>
-              <li>Build & enable actionable (self-service) BI</li>
-              <li>Data quality programs</li>
-              <li>Implementation of data-standards</li>
-            </ul>
             <br />
             <p>
               Through my <strong>extensive network</strong>, I can also provide a (team of) developer(s) skilled in any of the top programming languages to meet project demands efficiently and effectively.
             </p>
           </div>
 
-          {/* Right Section - Venn Diagram */}
+          {/* Right Section - Venn Diagram and Skills List */}
           <div className="venn-diagram-wrapper">
             <img src="/assets/images/VennDiagram.png" alt="Venn Diagram" className="venn-diagram" />
+            
+            {/* Skills List Below Venn Diagram */}
+            <div className="skills-list">
+              <ul>
+                <li>Setup, manage or coach data teams</li>
+                <li>Project-, Product- and Stakeholder Management</li>
+                <li>Blockchain, JavaScript and/or Python development</li>
+                <li>Build & enable actionable (self-service) BI</li>
+                <li>Data quality programs</li>
+                <li>Implementation of data-standards</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
+
+      <section className="testimonials-section">
+        <div className="testimonials-title">
+          <h2>Testimonials</h2>
+          <button className="lets-talk-button" onClick={showLetsTalkModal}>Let's Talk!</button>
+        </div>
+
+        <div
+          className={`testimonials-container ${isHovered ? "paused" : ""}`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >          
+          {/* Testimonial 1 */}
+          <div className="testimonial">
+            <img src="/assets/images/DianaElRafai.png" alt="Client 1" className="testimonial-photo" />
+            <div className="testimonial-text">
+              <h3>Diana ElRafai</h3>
+              <p className="testimonial-title">Customer Success Manager</p>
+              <p className="testimonial-content">
+                "After stepping in as Project Manager, Imre quickly turned around a complex project that required careful coordination between our off-shore development team and the client. 
+                <br/><br/>
+                His proactive approach in aligning deliverables with client expectations resulted in a smooth communication flow and high client satisfaction. Remarkably, he achieved +/-40% reduction in development time through his efficiency, interpersonal skills and strategic oversight. 
+                <br/><br/>
+                
+                Imre's ability to restore trust and deliver results under challenging circumstances has been invaluable"
+              </p>
+            </div>
+          </div>
+
+          <div className="testimonial">
+            <img src="/assets/images/CryptoSlavvv.png" alt="Client 2" className="testimonial-photo" />
+            <div className="testimonial-text">
+              <h3>CryptoSlavv</h3>
+              <p className="testimonial-title">Founder, SEIPOCALYPSE</p>
+              <p className="testimonial-content">
+                "The collaboration with Imre and DappAstra on our gaming project was very positive. From the initial discussion to consulting, project management, meeting timelines, and quickly implementing feedback into the product. 
+                <br/><br/>
+                I can highly recommend Imre and DappAstra if you value good guidance and support throughout the project implementation."
+              </p>
+            </div>
+          </div>
+
+          <div className="testimonial">
+            <img src="/assets/images/GurpreetSingh.png" alt="Client 3" className="testimonial-photo" />
+            <div className="testimonial-text">
+              <h3>Gurpreet Singh</h3>
+              <p className="testimonial-title">Solutions Architect, SettleMint India</p>
+              <p className="testimonial-content">
+                "As Solutions Architect at SettleMint I have got to know Imre as a dedicated Project Manager able to skillfully bridge the gap between client requirements and our full-stack, off-shore, development team. 
+                <br/><br/>
+                His exceptional interpersonal, analytical and web3 skills enable him able to effectively mange stakeholders, tackle challenges and exploit opportunities, making him a highly effective and reliable collaborator."
+              </p>
+            </div>
+          </div>
+
+          <div className="testimonial">
+            <img src="/assets/images/Massimo-Terranova.png" alt="Client 4" className="testimonial-photo" />
+            <div className="testimonial-text">
+              <h3>Massimo Terranova</h3>
+              <p className="testimonial-title">Digital Projects Data Specialist, Grohe</p>
+              <p className="testimonial-content">
+                "My experience in working with Imre has been very positive. The project management he provides is highly professional and the quality of work meets expectations, often exceeding them. Specialization in the sanitary business greatly facilitates communication and requests for support are promptly responded to"
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* Reusable sections with alternating content */}
       <motion.section
@@ -269,9 +331,7 @@ export default function Home() {
             <li>Co-Development of Group KPIs/OKR and controls</li>
           </ul>
 
-          <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="download-resume-button">
-            Download Resume
-          </a>
+          <button className="download-resume-button" onClick={showLetsTalkModal}>Reach out</button>
 
         </div>
 
@@ -333,9 +393,7 @@ export default function Home() {
             <li>Report on next steps</li>
           </ul>
 
-          <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="download-resume-button">
-            Download Resume
-          </a>
+          <button className="download-resume-button" onClick={showLetsTalkModal}>Reach out</button>
         </div>
 
         <div className="picture">
@@ -423,9 +481,7 @@ export default function Home() {
             <li>Implemented group-wide BI-suite & PIM</li>
           </ul>
 
-          <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="download-resume-button">
-            Download Resume
-          </a>
+          <button className="download-resume-button" onClick={showLetsTalkModal}>Reach out</button>
 
         </div>
       </motion.section>
@@ -487,9 +543,7 @@ export default function Home() {
           Developed an Excel/VBA-based calculator tool to assist account management and sourcing
           </p>
 
-          <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="download-resume-button">
-            Download Resume
-          </a>
+          <button className="download-resume-button" onClick={showLetsTalkModal}>Reach out</button>
 
         </div>
 
@@ -562,9 +616,7 @@ export default function Home() {
             <li>Business Analysis</li>
           </ul>
 
-          <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="download-resume-button">
-            Download Resume
-          </a>
+          <button className="download-resume-button" onClick={showLetsTalkModal}>Reach out</button>
 
         </div>
       </motion.section>
@@ -620,9 +672,7 @@ export default function Home() {
             <li>Member GS1 steering committee</li>
           </ul>
 
-          <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="download-resume-button">
-            Download Resume
-          </a>
+          <button className="download-resume-button" onClick={showLetsTalkModal}>Reach out</button>
 
         </div>
 
