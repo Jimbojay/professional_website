@@ -195,14 +195,22 @@ export default function Home() {
             
             {/* Skills List Below Venn Diagram */}
             <div className="skills-list">
-              <ul>
-                <li>Setup, manage or coach data teams</li>
-                <li>Project-, Product- and Stakeholder Management</li>
-                <li>Blockchain, JavaScript and/or Python development</li>
-                <li>Build & enable actionable (self-service) BI</li>
-                <li>Data quality programs</li>
-                <li>Implementation of data-standards</li>
-              </ul>
+              <ul style={{ listStyleType: 'none', padding: 0 }}>
+                <li>
+                    <span style={{ border: '2px solid #007BFF', padding: '2px 5px', borderRadius: '4px' }}>
+                        &#10004;
+                    
+                    <strong> Data360 Audit</strong>: A Full-Circle View of Your Data Strategy
+                    </span>
+                </li>
+                <li>&#10003; Data Team Enablement & Coaching</li>
+                <li>&#10003; Project, Product, & Stakeholder Management</li>
+                <li>&#10003; Blockchain, JavaScript, & Python Development</li>
+                <li>&#10003; Actionable & Self-Service BI Implementation</li>
+                <li>&#10003; Data Quality & Governance Programs</li>
+                <li>&#10003; Data Standards Implementation</li>
+            </ul>
+
             </div>
           </div>
         </div>
@@ -221,7 +229,7 @@ export default function Home() {
         >          
           {/* Testimonial 1 */}
           <div className="testimonial">
-            <img src="/assets/images/DianaElRafai.png" alt="Client 1" className="testimonial-photo" />
+            <img src="/assets/images/DianaElRafai.png" alt="DianaElRafai" className="testimonial-photo" />
             <div className="testimonial-text">
               <h3>Diana ElRafai</h3>
               <p className="testimonial-title">Customer Success Manager</p>
@@ -237,7 +245,22 @@ export default function Home() {
           </div>
 
           <div className="testimonial">
-            <img src="/assets/images/CryptoSlavvv.png" alt="Client 2" className="testimonial-photo" />
+            <img src="/assets/images/AleksandarMitchell.png" alt="AleksandarMitchell" className="testimonial-photo" />
+            <div className="testimonial-text">
+              <h3>Aleksandar Mitchell</h3>
+              <p className="testimonial-title">CTO, DappAstra</p>
+              <p className="testimonial-content">
+                "I can always count on Imre as a dependable, strategic partner who consistently supports and streamlines our collective goals, making a significant, positive impact every day.
+                <br/><br/>
+                Collaborating with Imre as the COO of DappAstra has been instrumental in driving our team’s efficiency and success.
+                His reliability and proactive involvement ensure our developers stay focused on their core expertise—programming—by handling all the essential but time-consuming tasks, such as client interaction, requirement analysis, milestone management, and contract negotiations.                 
+                "
+              </p>
+            </div>
+          </div>
+
+          {/* <div className="testimonial">
+            <img src="/assets/images/CryptoSlavvv.png" alt="CryptoSlavvv" className="testimonial-photo" />
             <div className="testimonial-text">
               <h3>CryptoSlavv</h3>
               <p className="testimonial-title">Founder, SEIPOCALYPSE</p>
@@ -247,23 +270,23 @@ export default function Home() {
                 I can highly recommend Imre and DappAstra if you value good guidance and support throughout the project implementation."
               </p>
             </div>
-          </div>
+          </div> */}
 
           <div className="testimonial">
-            <img src="/assets/images/GurpreetSingh.png" alt="Client 3" className="testimonial-photo" />
+            <img src="/assets/images/GurpreetSingh.png" alt="GurpreetSingh" className="testimonial-photo" />
             <div className="testimonial-text">
               <h3>Gurpreet Singh</h3>
               <p className="testimonial-title">Solutions Architect, SettleMint India</p>
               <p className="testimonial-content">
                 "As Solutions Architect at SettleMint I have got to know Imre as a dedicated Project Manager able to skillfully bridge the gap between client requirements and our full-stack, off-shore, development team. 
                 <br/><br/>
-                His exceptional interpersonal, analytical and web3 skills enable him able to effectively mange stakeholders, tackle challenges and exploit opportunities, making him a highly effective and reliable collaborator."
+                His exceptional interpersonal, analytical and web3 skills enable him able to effectively manage stakeholders, tackle challenges and exploit opportunities, making him a highly effective and reliable collaborator."
               </p>
             </div>
           </div>
 
           <div className="testimonial">
-            <img src="/assets/images/Massimo-Terranova.png" alt="Client 4" className="testimonial-photo" />
+            <img src="/assets/images/Massimo-Terranova.png" alt="Massimo-Terranova" className="testimonial-photo" />
             <div className="testimonial-text">
               <h3>Massimo Terranova</h3>
               <p className="testimonial-title">Digital Projects Data Specialist, Grohe</p>
@@ -272,6 +295,22 @@ export default function Home() {
               </p>
             </div>
           </div>
+
+          <div className="testimonial">
+            <img src="/assets/images/DriesWiersma.png" alt="DriesWiersma" className="testimonial-photo" />
+            <div className="testimonial-text">
+              <h3>Dries Wiersma</h3>
+              <p className="testimonial-title">Commercial Manager, IHC Fabrication</p>
+              <p className="testimonial-content">
+                "Imre has the ability to quickly make himself familiar with the specific assignment. 
+                He developed an intelligent tool with which a scan of all available data can be done in order to analyze realized production costs. Based on this analyzes cost prices can be evaluated and necessary actions taken. Imre has no problem with multilevel communication within an production environment. He acquired the for his tool necessary production knowledge quickly. His analytic approach is pleasant, professional and definitely to the point."
+              </p>
+            </div>
+          </div>
+
+ 
+
+
         </div>
       </section>
 

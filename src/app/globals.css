@@ -254,7 +254,7 @@ body {
 }
 
 .skills-list li::before {
-    content: "•"; /* Custom bullet */
+    /* content: "•"; Custom bullet */
     color: #617E82; /* Custom color for the bullet */
     font-weight: bold;
     position: absolute;
@@ -1134,7 +1134,7 @@ html {
     margin-bottom: 100px; /* Adjust as necessary */
     background-color: #f7f9fc;
     overflow: hidden;
-    width: 100vw;
+    width: 150vw;
     position: relative;
     border: 2px solid #829390; /* Same border as the "Let's talk!" button */
     border-radius: 8px; /* Rounded corners */
@@ -1182,18 +1182,17 @@ html {
 /* Scrolling animation */
 @keyframes scroll-left {
     0% {
-        transform: translateX(100%);
+        transform: translateX(0);
     }
     100% {
-        transform: translateX(-100%);
+        transform: translateX(-100%); /* Adjust to scroll halfway */
     }
 }
 
 .testimonials-container {
     display: flex;
     gap: 40px;
-    animation: scroll-left 30s linear infinite;
-    transition: animation-play-state 0.3s ease;
+    animation: scroll-left 30s linear infinite; /* Adjust duration for smooth scrolling */
 }
 
 /* Paused state for testimonials container */
