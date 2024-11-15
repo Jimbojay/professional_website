@@ -4,10 +4,20 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Footer from "./components/Footer";
 
+
 export default function Home() {
   const [showQrCode, setShowQrCode] = useState(false);
   const [showLetsTalk, setShowLetsTalk] = useState(false); // New state for "Let's Talk!" popup
   const [isHovered, setIsHovered] = useState(false);
+  const [showData360Modal, setShowData360Modal] = useState(false); // New state for Data360 popup
+
+  const [showData360Form, setShowData360Form] = useState(false); // Define state for showData360Form
+
+  const openData360Form = () => setShowData360Form(true); // Function to open form
+  const closeData360Form = () => setShowData360Form(false); // Function to close form
+
+  const openData360Modal = () => setShowData360Modal(true);
+  const closeData360Modal = () => setShowData360Modal(false);
 
   const showQrCodeModal = () => {
     setShowQrCode(true);
@@ -23,6 +33,34 @@ export default function Home() {
 
   const closeLetsTalkModal = () => {
     setShowLetsTalk(false);
+  };
+
+  const [formData, setFormData] = useState({
+    gender: '',
+    fullName: '',
+    email: '',
+    organization: '',
+    position: '',
+    message: '',
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch('/api/sendData360Inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+    });
+    if (response.ok) {
+        alert('Your inquiry has been submitted successfully!');
+        setShowData360Form(false); // Close modal on success
+    } else {
+        alert('There was an error submitting your inquiry. Please try again.');
+    }
   };
 
   useEffect(() => {
@@ -67,6 +105,38 @@ export default function Home() {
     }
   }, [showLetsTalk]);
 
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Get references to the elements
+      const testimonialsSection = document.getElementById("testimonials-section");
+      const socialMediaIcons = document.querySelector(".social-media");
+
+      if (testimonialsSection && socialMediaIcons) {
+        // Get the bottom of the icon and the top/bottom of the testimonials section
+        const testimonialsTop = testimonialsSection.getBoundingClientRect().top;
+        const testimonialsBottom = testimonialsSection.getBoundingClientRect().bottom;
+        const socialIconsBottom = socialMediaIcons.getBoundingClientRect().bottom;
+
+        // Check if icons reached the top of the testimonials section
+        if (socialIconsBottom >= testimonialsTop && socialIconsBottom <= testimonialsBottom) {
+          setIconClass("icon-black"); // Change to black
+        } else {
+          setIconClass("icon-white"); // Change back to white
+        }
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+
   return (
     <div>
       {/* Full-width banner */}
@@ -90,9 +160,9 @@ export default function Home() {
                 <img src="/assets/images/github-icon.png" alt="GitHub Icon" className="icon-white" />
               </a>
             </div>
-            <a href="/assets/documents/Curriculum Vitae Imre Dekker_2024 English.pdf" download className="resume-button">
+            {/* <a href="/assets/documents/CV Resume ImreDekker.pdf" download className="resume-button">
               Download My Resume
-            </a>
+            </a> */}
           </div>
         </div>
 
@@ -145,6 +215,85 @@ export default function Home() {
         </div>
       )}
 
+
+      {showData360Modal && (
+        <div className="modal-overlay" onClick={closeData360Modal}>
+          <div className="data360-modal-content" onClick={(e) => e.stopPropagation()}>
+            <span className="close" onClick={closeData360Modal}>&times;</span>
+            {/* Modal content */}
+            <h2>Unlock Your Data's Potential with <strong>Data360 Audit</strong></h2>
+            <ul className="offer-details">
+              <li>🎤 <strong>5 In-Depth Interviews</strong> with up to 3 participants each, to understand data priorities</li>
+              <li>🔍 <strong>3 Days of Data Analysis</strong> to evaluate your current data structure/-model and identify actionable insights</li>
+              <li>🛠️ <strong>1 Workshop</strong> to co-develop data solutions aligned with your strategic goals</li>              <li>📊 <strong>SWOT Analysis Report</strong> covering strengths, weaknesses, opportunities, and threats in your data landscape</li>
+              <li>🏆 <strong>Top 3 Focus Areas</strong> based on SWOT analysis to prioritize impactful changes</li>
+            </ul>
+
+            {/* Price and Call-to-Action Text */}
+            <p className="price-text" style={{ fontSize: "20px", color: "#344152", fontWeight: "bold", marginTop: "20px" }}>
+                All this for just <span style={{ fontSize: "22px", color: "#617E82" }}>€6.950</span>
+            </p>
+            
+            <p className="cta-text" style={{ fontSize: "18px", color: "#617E82", fontWeight: "normal" }}>
+                Take the next step toward a data-driven future to <strong>capture growth opportunities</strong>, 
+                <strong> enhance decision-making</strong>, and <strong> mitigate risks</strong>. Book your <strong>Data360 Audit</strong> today and turn insights into impactful results.
+            </p>
+
+            {/* Button with urgency to drive action */}
+            <button 
+              className="modal-button primary-button2" 
+              onClick={() => {
+                closeData360Modal();
+                openData360Form(); // This will open the form modal
+              }}
+            >
+              Get Started with Data360 Audit
+            </button>
+          </div>
+        </div>
+      )}
+
+
+      {showData360Form && (
+          <div className="modal-overlay" onClick={() => setShowData360Form(false)}>
+              <div className="form-modal-content" onClick={(e) => e.stopPropagation()}>
+                  <span className="close" onClick={() => setShowData360Form(false)}>&times;</span>
+                  <h2>Data360 Audit Inquiry</h2>
+                  <br/>
+                  <form onSubmit={handleSubmit}>
+                      <label htmlFor="gender">Preferred Title/Gender:</label>
+                      <select 
+                        id="gender" 
+                        name="gender" 
+                        required 
+                        onChange={handleInputChange}
+                      >
+                        <option value="" disabled selected>Select your title</option>
+                        <option value="Mr.">Mr.</option>
+                        <option value="Ms.">Ms.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Mx.">Mx. (gender-neutral)</option>
+                        <option value="Dr.">Dr.</option>
+                        <option value="Prof.">Prof.</option>
+                        <option value="None">None</option>
+                      </select>
+                      <label>Full Name:</label>
+                      <input type="text" name="fullName" placeholder="Enter your full name" required onChange={handleInputChange} />
+                      <label>Email:</label>
+                      <input type="email" name="email" placeholder="Enter your email address" required onChange={handleInputChange} />
+                      <label>Organization:</label>
+                      <input type="text" name="organization" placeholder="Your organization" required onChange={handleInputChange} />
+                      <label>Position:</label>
+                      <input type="text" name="position" placeholder="Your position" required onChange={handleInputChange} />
+                      <label>Message:</label>
+                      <textarea name="message" placeholder="Write your message here..." required onChange={handleInputChange} />
+                      <button type="submit" className="modal-button">Submit Inquiry</button>
+                  </form>
+              </div>
+          </div>
+      )}
+
+
       {/* Logo section below the banner - always visible */}
       <section className="logo-section">
         <div className="logo-container">
@@ -194,23 +343,31 @@ export default function Home() {
             <img src="/assets/images/VennDiagram.png" alt="Venn Diagram" className="venn-diagram" />
             
             {/* Skills List Below Venn Diagram */}
-            <div className="skills-list">
-              <ul style={{ listStyleType: 'none', padding: 0 }}>
-                <li>
-                    <span style={{ border: '2px solid #007BFF', padding: '2px 5px', borderRadius: '4px' }}>
-                        &#10004;
-                    
-                    <strong> Data360 Audit</strong>: A Full-Circle View of Your Data Strategy
-                    </span>
-                </li>
-                <li>&#10003; Data Team Enablement & Coaching</li>
-                <li>&#10003; Project, Product, & Stakeholder Management</li>
-                <li>&#10003; Blockchain, JavaScript, & Python Development</li>
-                <li>&#10003; Actionable & Self-Service BI Implementation</li>
-                <li>&#10003; Data Quality & Governance Programs</li>
-                <li>&#10003; Data Standards Implementation</li>
-            </ul>
 
+            <div className="skills-buttons">
+              <div>
+                <button className="primary-button" onClick={openData360Modal}>
+                  <span>→ <u>Data360 Audit</u> ←</span>
+                  <div className="secondary-text">🚀 Uncover growth opportunities and expose challenges 🚀</div>
+                </button>
+              </div>  
+
+
+
+
+              <div className="secondary-buttons">
+                  <button className="secondary-button" onClick={showLetsTalkModal}>
+                    Let's Talk!
+                  </button>
+
+                  <button 
+                    className="secondary-button"
+                    onClick={() => window.open('/assets/documents/CV Resume ImreDekker.pdf')}
+                  >
+                    Download My Resume
+                  </button>
+                  
+              </div>
             </div>
           </div>
         </div>
@@ -255,6 +412,21 @@ export default function Home() {
                 Collaborating with Imre as the COO of DappAstra has been instrumental in driving our team’s efficiency and success.
                 His reliability and proactive involvement ensure our developers stay focused on their core expertise—programming—by handling all the essential but time-consuming tasks, such as client interaction, requirement analysis, milestone management, and contract negotiations.                 
                 "
+              </p>
+            </div>
+          </div>
+
+          <div className="testimonial">
+            <img src="/assets/images/TinieDhondt.png" alt="Tinie D'Hondt" className="testimonial-photo" />
+            <div className="testimonial-text">
+              <h3>Tinie D'Hondt</h3>
+              <p className="testimonial-title">Managing Partner, Master Data Partners</p>
+              <p className="testimonial-content">
+                "It is always a pleasure to work with Imre. His professional attitude and meticulous approach have made each project a success. Imre pays great attention to accuracy and always works with the utmost care.
+                <br/><br/>
+                His diplomatic approach and excellent communication skills ensure that everyone remains well-informed, and any challenges are efficiently resolved. Furthermore, he is a pleasant person to work with, making our collaboration all the more valuable.
+                <br/><br/>
+                I can certainly recommend Imre to anyone looking for a reliable and professional partner!"
               </p>
             </div>
           </div>
@@ -307,10 +479,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-
- 
-
-
         </div>
       </section>
 
@@ -334,8 +502,25 @@ export default function Home() {
 
 
         <div className="section1-text-box">
-          {/* <br/><br/><br/> */}
-          <h3><i>Co-founder & COO</i></h3>
+
+          <div className="full-width-paragraph">
+            <p><i>
+            With strong business acumen, data expertise, and people skills, I build and lead data management teams to drive meaningful results. My strategic approach aligns data frameworks with business goals, transforming data into a valuable asset for growth and decision-making.
+            <br/><br/>
+            I develop high-performing teams through mentoring and clear communication of complex data concepts, empowering team members to lead impactful initiatives and fostering a collaborative, data-driven culture across the organization.
+            </i></p>
+            <br/>
+          </div>
+
+          {/* <br/><br/> */}
+
+          <h3><i>Data Governance Analyst</i></h3>
+          <ul>
+            <li>Support setup of Data Management department</li>
+            <li>Coach in-house Data Manager</li>
+          </ul>
+          
+          <h3 className="column-break"><i>Co-founder & COO</i></h3>
           <ul>
             <li>Co-founder & COO</li>
             <li>Built ever-growing network of freelance developers</li>
@@ -348,11 +533,7 @@ export default function Home() {
             <li>3 grants from The Graph</li>
           </ul>
           
-          <h3 className="column-break"><i>Data Governance Analyst</i></h3>
-          <ul>
-            <li>Support setup of Data Management department</li>
-            <li>Coach in-house Data Manager</li>
-          </ul>
+
           
           <br/>
 
@@ -393,7 +574,12 @@ export default function Home() {
 
 
         <div className="section1-text-box">
-          {/* <br/><br/><br/> */}
+          <div className="full-width-paragraph">
+            <p><i>
+            My expertise in data quality and governance ensures data accuracy, compliance, and reliability. I establish clear standards and robust processes that uphold data integrity, empowering teams to leverage trusted data confidently for impactful decision-making.
+            </i></p>
+            <br/>
+          </div>
 
           <h3><i>Data Govenance Analyst</i></h3>
           <ul>
@@ -462,7 +648,15 @@ export default function Home() {
 
 
         <div className="section1-text-box">
-          {/* <br/><br/><br/> */}
+
+        <div className="full-width-paragraph">
+            <p><i>
+            I’m experienced in managing cross-functional data projects from start to finish, ensuring they stay within scope, 
+            time, and budget constraints. This experience has honed my ability to coordinate with various teams, prioritize effectively, 
+            and manage data-related projects with clarity and precision.
+            </i></p>
+            <br/>
+          </div>
 
           <h3><i>Project Manager Tokenization/RWA</i></h3>
           <ul>
@@ -476,28 +670,27 @@ export default function Home() {
           </ul>
 
           <br/>
-          
-          <h3><i>Co-founder & COO</i></h3>
-          <ul>
-            <li>Game development (TON) </li>
-            <li>Multiple grants The Graph</li>
-            <li>Chainlink hackathon </li>
-            <li>Copy Trader</li>
-            <li>Build-a-bot (low code trading bot builder)</li>
-            <li>True randomization</li>
-            <li>Decentralized crowd sale</li>
-            <li>Token generator </li>
-            <li>DappAstra NFT collection</li>
-          </ul>
 
-          <br/>
-
-          <h3 className="column-break"><i>Project lead Data Quality</i></h3>
+          <h3><i>Project lead Data Quality</i></h3>
           <ul>
             <li>GS1 data quality projects </li>
             <li>100% data compliancy for many companies</li>
             <li>Clients: a.o. Grohe, Van Marcke, Orkla House Care, European Aerosols, PGB. </li>
           </ul>
+
+          
+          <h3 className="column-break"><i>Co-founder & COO</i></h3>
+          <ul>
+            <li>Game development (TON) </li>
+            <li>Multiple grants The Graph</li>
+            <li>Chainlink hackathon </li>
+            <li>Build-a-bot (low code trading bot builder)</li>
+            <li>True randomization</li>
+            <li>Token generator </li>
+            <li>DappAstra NFT collection</li>
+          </ul>
+
+
 
           <br/>
 
@@ -544,11 +737,21 @@ export default function Home() {
         <div className="section1-text-box">
           {/* <br/><br/><br/> */}
 
-          <p>
-          <strong>Through my extensive network, I can provide a (team of) developer(s) skilled in any of the top programming languages to meet project demands efficiently and effectively.</strong>
-          </p>
+          <div className="full-width-paragraph">
+            <p><i>
+            As a programmer focused on fit-for-purpose solutions, I adapt to each project’s unique needs—whether in JavaScript, Python, 
+            ,Web3, a.o. I leverage blockchain not just for transparency but to enhance security and trust in cases where it 
+            delivers real business value. Supported by a network of skilled developers, I can rapidly assemble the right team, 
+            ensuring I meet project demands with precision and deliver results aligned with strategic goals.
+            </i></p>
+            <br/>
+          </div>
 
-          <br/><br/>
+          {/* <p>
+          <strong>Through my extensive network, I can provide a (team of) developer(s) skilled in any of the top programming languages to meet project demands efficiently and effectively.</strong>
+          </p> */}
+
+          {/* <br/><br/> */}
 
           <h3><i>Python Automation Developer</i></h3>
           <ul>
@@ -612,7 +815,17 @@ export default function Home() {
 
 
         <div className="section1-text-box">
-          {/* <br/><br/><br/> */}
+
+          <div className="full-width-paragraph">
+            <p><i>
+            I’m skilled in deploying and optimizing BI tools, creating dashboards, and setting up key metrics that drive 
+            business decisions. My ability to translate data into actionable insights is crucial in helping teams make data-driven 
+            decisions quickly and confidently.
+            </i></p>
+            <br/>
+          </div>
+
+
           <h3><i>Business Analyst</i></h3>
           <ul>
             <li>Requirements engineering & challenging business</li>
@@ -624,15 +837,14 @@ export default function Home() {
           </ul>
 
           <br/>
-          <h3><i>Consultancy</i></h3>
-          <ul>
-            <li>Produced several dashboards for the ABN-Amro and Rabobank and the Ministiry of Internal affairs</li>
-          </ul>
-
-          <br/>
-          <h3 className="column-break"><i>Data Manager</i></h3>
+          <h3><i>Data Manager</i></h3>
           <ul>
             <li>Lead analyst & BI Developer</li>
+          </ul>
+          
+          <h3 className="column-break"><i>Consultancy</i></h3>
+          <ul>
+            <li>Produced several dashboards for the ABN-Amro and Rabobank and the Ministiry of Internal affairs</li>
           </ul>
 
           <br/>
@@ -677,13 +889,19 @@ export default function Home() {
 
 
         <div className="section1-text-box">
-          {/* <br/><br/><br/> */}
 
-          <p>
+          <div className="full-width-paragraph">
+            <p><i>
+            Product data is essential for efficient supply chains, e-commerce, and marketing. With a strong GS1 and ETIM network, I help teams use data strategically for smarter prioritization, better user experiences, and streamlined lifecycle management, implementing standards across technical and operational dimensions for impactful results.
+            </i></p>
+            <br/>
+          </div>
+
+          {/* <p>
           <strong>Well established nework in both GS1 as well as ETIM</strong>
-          </p>
+          </p> */}
 
-          <br/><br/>
+          {/* <br/><br/> */}
 
           <h3><i>Project lead Data Quality</i></h3>
           <ul>
@@ -730,3 +948,4 @@ export default function Home() {
     </div>
   );
 }
+

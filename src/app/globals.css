@@ -185,7 +185,7 @@ body {
     display: flex;
     justify-content: center; /* Center the entire content horizontally */
     align-items: center; /* Vertically align both items */
-    margin-top: 60px; /* Adjust the margin-top */
+    margin-top: 120px; /* Adjust the margin-top */
 }
 
 /* Wrapper for the content group (text and Venn diagram) */
@@ -221,14 +221,320 @@ body {
     height: auto;
 }
 
-/* Venn diagram section */
+
+/* Container for button alignment */
+.skills-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+
+/* Data360 Modal Content Styling */
+.data360-modal-content {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+    position: relative;
+    font-family: 'Source Code Pro', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.data360-modal-content h2 {
+    font-size: 24px;
+    color: #1E2831;
+    font-weight: 800;
+}
+
+.offer-details {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.offer-details li {
+    font-size: 16px;
+    color: #344152;
+    margin: 10px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.offer-details li::before {
+    content: "✔️";
+    position: absolute;
+    left: 0;
+    color: #617E82;
+}
+
+.cta-text {
+    font-size: 18px;
+    color: #617E82;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+
+
+.primary-button {
+    position: relative;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #1E2831, #344152);
+    border: 2px solid #829390;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px; /* Space between main text and subtitle */
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-button2 {
+    position: relative;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #1E2831, #344152);
+    border: 2px solid #829390;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px; /* Space between main text and subtitle */
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Left arrow */
+.primary-button::before {
+    content: '';
+    font-size: 18px; /* Adjust as needed */
+    color: #ffffff;
+    position: absolute;
+    left: 10px; /* Adjust positioning relative to the button’s padding */
+    top: 12px; /* Adjust for vertical alignment */
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* Hover effect */
+.primary-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(125, 211, 239, 0.9); /* Bright glow on hover */
+}
+
+/* Active state for a pressed effect */
+.primary-button:active {
+    transform: scale(0.98);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Wrapper for pulsing effect */
+.button-pulse-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.button-pulse-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -3px;
+    right: -3px;
+    bottom: -10px;
+    border-radius: 12px;
+    border: 4px solid rgba(97, 126, 130, 0.6); /* Light blue glow */
+    opacity: 0;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.primary-button::after {
+    content: '';
+    font-size: 18px;
+    color: #ffffff;
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    font-weight: 800; /* Bolder font weight */
+}
+
+.primary-button .button-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Space between arrows and main text */
+    white-space: nowrap; /* Keeps text in a single line */
+}
+
+/* Subtitle styling */
+.primary-button .secondary-text {
+    font-size: 0.85em;
+    font-style: italic;
+    color: #ffffff;
+    display: block;
+    line-height: 1.2;
+    margin-top: 4px;
+}
+
+.secondary-text {
+    font-size: 0.85em;
+    font-style: italic;
+    margin-top: 4px; /* Adds a little space between lines */
+    display: block; /* Forces a new line */
+}
+
+/* Bounce keyframe for hover */
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+
+/* Secondary buttons for Resume and Let's Talk */
+.secondary-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.secondary-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #829390;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.secondary-button:hover {
+    background-color: #617E82;
+    transform: scale(1.03);
+}
+
+
+.form-modal-content {
+    background: linear-gradient(135deg, #f7f9fc, #e3eff7); /* Subtle gradient */;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-modal-content label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #344152;
+}
+
+.form-modal-content input,
+.form-modal-content select,
+
+.form-modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 4px;
+    border: 1px solid #b0c4de; /* Lighter blue border */
+    border-radius: 8px;
+    font-size: 16px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
+    transition: all 0.3s ease;
+}
+
+.form-modal-content input:focus,
+.form-modal-content select:focus,
+.form-modal-content textarea:focus {
+    border-color: #83c5be; /* Accent color on focus */
+    box-shadow: 0px 4px 8px rgba(97, 126, 130, 0.3); /* Darker shadow on focus */
+}
+
+.form-modal-content input:hover,
+.form-modal-content select:hover,
+.form-modal-content textarea:hover {
+    background-color: #f1f9fd; /* Light blue background on hover */
+}
+
+.form-modal-content textarea[name="message"] {
+    width: 100%;         /* Full width of the form */
+    height: 200px;       /* Increase height specifically for the message area */
+    resize: vertical;    /* Allow user to resize vertically */
+    padding: 10px;       /* Padding for readability */
+    font-size: 16px;     /* Larger font for easier reading */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-modal-content button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #1E2831, #344152);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+
+/* Adjust alignment to Venn diagram */
+.venn-diagram-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Venn diagram section
 .venn-diagram-wrapper {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-}
+} */
 
 .venn-diagram {
     width: 350px; /* Adjust size of the Venn diagram */
@@ -1130,7 +1436,7 @@ html {
     flex-direction: column;
     justify-content: center;
     padding: 50px 0;
-    margin-top: 60px;
+    margin-top: 120px;
     margin-bottom: 100px; /* Adjust as necessary */
     background-color: #f7f9fc;
     overflow: hidden;
@@ -1192,7 +1498,7 @@ html {
 .testimonials-container {
     display: flex;
     gap: 40px;
-    animation: scroll-left 30s linear infinite; /* Adjust duration for smooth scrolling */
+    animation: scroll-left 45s linear infinite; /* Adjust duration for smooth scrolling */
 }
 
 /* Paused state for testimonials container */
