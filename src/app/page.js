@@ -169,7 +169,7 @@ export default function Home() {
         <img src="/assets/images/Banner.png" alt="Banner Image" className="banner-image" />
 
         {/* Button overlaying the banner */}
-        <button className="banner-button" onClick={showLetsTalkModal}>Let's talk!</button>
+        <button className="banner-button" onClick={showLetsTalkModal}>Let&apos;s talk!</button>
       </div>
 
       {/* Modal for phone number with QR code */}
@@ -221,7 +221,7 @@ export default function Home() {
           <div className="data360-modal-content" onClick={(e) => e.stopPropagation()}>
             <span className="close" onClick={closeData360Modal}>&times;</span>
             {/* Modal content */}
-            <h2>Unlock Your Data's Potential with <strong>Data360 Audit</strong></h2>
+            <h2>Unlock Your Data&apos;s Potential with <strong>Data360 Audit</strong></h2>
             <ul className="offer-details">
               <li>🎤 <strong>5 In-Depth Interviews</strong> with up to 3 participants each, to understand data priorities</li>
               <li>🔍 <strong>3 Days of Data Analysis</strong> to evaluate your current data structure/-model and identify actionable insights</li>
@@ -357,7 +357,7 @@ export default function Home() {
 
               <div className="secondary-buttons">
                   <button className="secondary-button" onClick={showLetsTalkModal}>
-                    Let's Talk!
+                    Let&apos;s Talk!
                   </button>
 
                   <button 
@@ -376,7 +376,7 @@ export default function Home() {
       <section className="testimonials-section">
         <div className="testimonials-title">
           <h2>Testimonials</h2>
-          <button className="lets-talk-button" onClick={showLetsTalkModal}>Let's Talk!</button>
+          <button className="lets-talk-button" onClick={showLetsTalkModal}>Let&apos;s Talk!</button>
         </div>
 
         <div
@@ -391,12 +391,12 @@ export default function Home() {
               <h3>Diana ElRafai</h3>
               <p className="testimonial-title">Customer Success Manager</p>
               <p className="testimonial-content">
-                "After stepping in as Project Manager, Imre quickly turned around a complex project that required careful coordination between our off-shore development team and the client. 
+              &quot;After stepping in as Project Manager, Imre quickly turned around a complex project that required careful coordination between our off-shore development team and the client. 
                 <br/><br/>
                 His proactive approach in aligning deliverables with client expectations resulted in a smooth communication flow and high client satisfaction. Remarkably, he achieved +/-40% reduction in development time through his efficiency, interpersonal skills and strategic oversight. 
                 <br/><br/>
                 
-                Imre's ability to restore trust and deliver results under challenging circumstances has been invaluable"
+                Imre&apos;s ability to restore trust and deliver results under challenging circumstances has been invaluable&quot;
               </p>
             </div>
           </div>
@@ -407,11 +407,11 @@ export default function Home() {
               <h3>Aleksandar Mitchell</h3>
               <p className="testimonial-title">CTO, DappAstra</p>
               <p className="testimonial-content">
-                "I can always count on Imre as a dependable, strategic partner who consistently supports and streamlines our collective goals, making a significant, positive impact every day.
+              &quot;I can always count on Imre as a dependable, strategic partner who consistently supports and streamlines our collective goals, making a significant, positive impact every day.
                 <br/><br/>
                 Collaborating with Imre as the COO of DappAstra has been instrumental in driving our team’s efficiency and success.
                 His reliability and proactive involvement ensure our developers stay focused on their core expertise—programming—by handling all the essential but time-consuming tasks, such as client interaction, requirement analysis, milestone management, and contract negotiations.                 
-                "
+                &quot;
               </p>
             </div>
           </div>
@@ -419,14 +419,14 @@ export default function Home() {
           <div className="testimonial">
             <img src="/assets/images/TinieDhondt.png" alt="Tinie D'Hondt" className="testimonial-photo" />
             <div className="testimonial-text">
-              <h3>Tinie D'Hondt</h3>
+              <h3>Tinie D&apos;Hondt</h3>
               <p className="testimonial-title">Managing Partner, Master Data Partners</p>
               <p className="testimonial-content">
-                "It is always a pleasure to work with Imre. His professional attitude and meticulous approach have made each project a success. Imre pays great attention to accuracy and always works with the utmost care.
+              &quot;It is always a pleasure to work with Imre. His professional attitude and meticulous approach have made each project a success. Imre pays great attention to accuracy and always works with the utmost care.
                 <br/><br/>
                 His diplomatic approach and excellent communication skills ensure that everyone remains well-informed, and any challenges are efficiently resolved. Furthermore, he is a pleasant person to work with, making our collaboration all the more valuable.
                 <br/><br/>
-                I can certainly recommend Imre to anyone looking for a reliable and professional partner!"
+                I can certainly recommend Imre to anyone looking for a reliable and professional partner!&quot;
               </p>
             </div>
           </div>
@@ -450,9 +450,9 @@ export default function Home() {
               <h3>Gurpreet Singh</h3>
               <p className="testimonial-title">Solutions Architect, SettleMint India</p>
               <p className="testimonial-content">
-                "As Solutions Architect at SettleMint I have got to know Imre as a dedicated Project Manager able to skillfully bridge the gap between client requirements and our full-stack, off-shore, development team. 
+              &quot;As Solutions Architect at SettleMint I have got to know Imre as a dedicated Project Manager able to skillfully bridge the gap between client requirements and our full-stack, off-shore, development team. 
                 <br/><br/>
-                His exceptional interpersonal, analytical and web3 skills enable him able to effectively manage stakeholders, tackle challenges and exploit opportunities, making him a highly effective and reliable collaborator."
+                His exceptional interpersonal, analytical and web3 skills enable him able to effectively manage stakeholders, tackle challenges and exploit opportunities, making him a highly effective and reliable collaborator.&quot;
               </p>
             </div>
           </div>
@@ -463,7 +463,7 @@ export default function Home() {
               <h3>Massimo Terranova</h3>
               <p className="testimonial-title">Digital Projects Data Specialist, Grohe</p>
               <p className="testimonial-content">
-                "My experience in working with Imre has been very positive. The project management he provides is highly professional and the quality of work meets expectations, often exceeding them. Specialization in the sanitary business greatly facilitates communication and requests for support are promptly responded to"
+              &quot;My experience in working with Imre has been very positive. The project management he provides is highly professional and the quality of work meets expectations, often exceeding them. Specialization in the sanitary business greatly facilitates communication and requests for support are promptly responded to&quot;
               </p>
             </div>
           </div>
@@ -474,8 +474,8 @@ export default function Home() {
               <h3>Dries Wiersma</h3>
               <p className="testimonial-title">Commercial Manager, IHC Fabrication</p>
               <p className="testimonial-content">
-                "Imre has the ability to quickly make himself familiar with the specific assignment. 
-                He developed an intelligent tool with which a scan of all available data can be done in order to analyze realized production costs. Based on this analyzes cost prices can be evaluated and necessary actions taken. Imre has no problem with multilevel communication within an production environment. He acquired the for his tool necessary production knowledge quickly. His analytic approach is pleasant, professional and definitely to the point."
+              &quot;Imre has the ability to quickly make himself familiar with the specific assignment. 
+                He developed an intelligent tool with which a scan of all available data can be done in order to analyze realized production costs. Based on this analyzes cost prices can be evaluated and necessary actions taken. Imre has no problem with multilevel communication within an production environment. He acquired the for his tool necessary production knowledge quickly. His analytic approach is pleasant, professional and definitely to the point.&quot;
               </p>
             </div>
           </div>
