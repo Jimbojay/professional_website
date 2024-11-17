@@ -7,14 +7,18 @@ export async function POST(req) {
     try {
         const formData = await req.json();
 
-        // Generate Excel file with form data
-        const filePath = await generateExcel(formData);
+        // // Generate Excel file with form data
+        // const filePath = await generateExcel(formData);
+
+        // // Send email with the Excel file as an attachment
+        // await sendEmail(formData, filePath);
+
+        // // Delete the file after sending
+        // fs.unlinkSync(filePath);
 
         // Send email with the Excel file as an attachment
-        await sendEmail(formData, filePath);
+        await sendEmail(formData);
 
-        // Delete the file after sending
-        fs.unlinkSync(filePath);
 
         return new Response(JSON.stringify({ message: 'Inquiry submitted successfully' }), {
             status: 200,
@@ -54,7 +58,7 @@ async function sendEmail(formData, filePath) {
         text: `Here is the Data360 inquiry submission:\n\n${Object.entries(formData)
             .map(([key, value]) => `${key}: ${value}`)
             .join('\n')}`,
-        attachments: [{ filename: 'inquiry_data360.xlsx', path: filePath }],
+        // attachments: [{ filename: 'inquiry_data360.xlsx', path: filePath }],
     };
 
     await transporter.sendMail(mailOptions);
