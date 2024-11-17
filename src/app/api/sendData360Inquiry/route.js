@@ -31,7 +31,8 @@ async function generateExcel(formData) {
     const worksheet = workbook.addWorksheet('Data360 Inquiry');
     worksheet.addRow(['Field', 'Value']);
     Object.entries(formData).forEach(([field, value]) => worksheet.addRow([field, value]));
-    const filePath = path.join(process.cwd(), 'inquiry_data360.xlsx');
+    // const filePath = path.join(process.cwd(), 'inquiry_data360.xlsx');
+    const filePath = path.join('/tmp', 'inquiry_data360.xlsx');
     await workbook.xlsx.writeFile(filePath);
     return filePath;
 }

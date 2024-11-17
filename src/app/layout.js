@@ -20,6 +20,9 @@ export const metadata = {
     "ID Data Solutions",
     "IDDataSolutions",
   ],
+  icons: {
+    icon: '/assets/images/Logo.png', // Use absolute path
+  },
   openGraph: {
     title: "ID Data Solutions | Next-Gen Data Lead",
     description: "All things data; Management, Governance, Project Management, Blockchain/Web3, BI & Analytics, and Product Data.",

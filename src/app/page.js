@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Footer from "./components/Footer";
+import Image from 'next/image';
 
 
 export default function Home() {
